@@ -32,8 +32,10 @@ public class JsonUtil {
 	 * @return
 	 */
 	public static JSONArray userList2json(List<User> list){
+		
 		JSONArray jsonArray = JSONArray.fromObject(list);
+		
 		return jsonArray;
 	}
-
+	
 }

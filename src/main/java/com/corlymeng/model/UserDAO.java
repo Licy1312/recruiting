@@ -167,16 +167,6 @@ public class UserDAO {
 			throw re;
 		}
 	}
-	public List findAllUser(){
-		
-		
-			String queryString = "from id,username User where 1=?";
-			Query queryObject = getCurrentSession().createQuery(queryString);
-			queryObject.setParameter(0, 1);
-			return queryObject.list();
-		
-	}
-
 	public User merge(User detachedInstance) {
 		log.debug("merging User instance");
 		try {

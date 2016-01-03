@@ -51,7 +51,6 @@ public class SaLoginController {
 	 */
 	@RequestMapping(value="user/{username}", method=RequestMethod.GET)
 	public @ResponseBody String getUser(@PathVariable String username){
-		System.out.println(username+"..............");
 		User user = userDAO.findByEmail(username);
 		JsonUtil jsonUtil = new JsonUtil();
 		return jsonUtil.user2json(user).toString();
@@ -59,11 +58,16 @@ public class SaLoginController {
 	}
 	@RequestMapping(value="user/allUser", method=RequestMethod.GET)
 	@SuppressWarnings("unchecked")
-	public @ResponseBody String getAllUser(){
-		List<User> list = userDAO.findAllUser();
-		JsonUtil jsonUtil = new JsonUtil();
-		return jsonUtil.userList2json(list).toString();
+	public @ResponseBody List<User> getAllUser(){
 		
+		List<User> list = userDAO.findAll();
+		for(User u: list ){
+			u.setRequireds(null);
+			u.setApplies(null);
+			u.setCollections(null);	
+		}
+		System.out.println(list);
+		return list;	
 	}
 	
 	@RequestMapping("salogout")

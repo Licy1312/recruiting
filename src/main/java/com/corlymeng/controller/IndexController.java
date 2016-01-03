@@ -9,6 +9,7 @@ import java.util.Map;
 
 
 
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringEscapeUtils;
@@ -32,6 +33,7 @@ import com.corlymeng.model.RequiredDAO;
 import com.corlymeng.model.User;
 import com.corlymeng.model.UserDAO;
 import com.corlymeng.util.MyUtil;
+import com.corlymeng.util.UrlInterface;
 
 @Controller
 public class IndexController {
@@ -56,8 +58,11 @@ public class IndexController {
 	private CollectionDAO collectionDAO;
 	
 	@RequestMapping("/")
-	public String showHome(){
-		
+	public String showHome(String username){
+		String url="http://192.168.31.135/rbac/backend/web/index.php?r=rbac/access-interface/authentication&id=7&url=/recruiting";
+		UrlInterface urlInterface = new UrlInterface();
+		System.out.println(urlInterface.loadJson(url)+"...............");
+
 		return "home";
 	}
 	
