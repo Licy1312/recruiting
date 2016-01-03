@@ -1,0 +1,50 @@
+@CHARSET "UTF-8";
+html{height: 100%;}
+body {
+  padding-top: 70px;
+  height:100%;
+  font: 14px/22px "Hiragino Sans GB","微软雅黑","宋体";
+}
+
+/***** home.jsp *****/
+.site-wrapper {
+    display: table;
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+}
+.site-wrapper-inner {
+    vertical-align: middle;
+    display: table-cell;
+    text-align: center;
+}
+
+/***** index.jsp *****/
+#side-menu>li>a {line-height: 45px;font-size: 20px;}
+#side-menu>li>ul{padding:12px;}
+#side-menu>li>ul>a{ white-space: nowrap;display: inline-block;
+    margin: 0 5px 5px 0;
+    padding: 0 8px;}
+#side-menu>li.active>a>.mdi-navigation-chevron-right:before {content:"\e8ac";}
+a.search{    right: 0px;
+    top: 0px;
+    position: absolute;}
+a.search i{font-size: 34px;}
+.required .col-md-7>div{line-height: 29px;}
+
+#mr_del{
+	    width: 40px;
+    height: 40px;
+    position: relative;
+    top: 17px;
+    z-index: 100;
+}
+#collection{
+	position:absolute;right:70px;
+}
+.search .active{
+	    background-color: #009688;
+    color: white;
+    padding: 6px;
+    border-radius: 10px;
+}
