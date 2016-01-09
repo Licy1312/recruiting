@@ -8,6 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML>
 <html>
   <head>
+  
     <base href="<%=basePath%>">
     
     <title>${title}</title>
@@ -21,8 +22,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="css/material.min.css" type="text/css"/>
 	<link rel="stylesheet" href="css/metisMenu.min.css" type="text/css"/>
+	<script language="javascript" src="js/jquery-2.1.4.min.js"></script>
+
   </head>
   <body>
+  <input id="status" type="hidden" value=“${status}”/>
   <div class="container">
 	   <%@ include file="../common/saheader.jsp" %> 
 	  <div class="bs-docs-section">
@@ -39,7 +43,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							  </div>
 							  <div class="row-content">
 								  <div class="action-secondary"><i class="glyphicon glyphicon-info-sign"></i></div>
-								  <h4 class="list-group-item-heading"><a href="${pageContext.request.contextPath}/">人员招聘分组</a></h4>
+								  <h4 class="list-group-item-heading"><a href="${pageContext.request.contextPath}/recruiting">人员招聘分组</a></h4>
 
 								  <p class="list-group-item-text">人员招聘分组：介绍。。。。</p>
 							  </div>
@@ -51,7 +55,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							  </div>
 							  <div class="row-content">
 								  <div class="action-secondary"><i class="glyphicon glyphicon-info-sign"></i></div>
-								  <h4 class="list-group-item-heading"><a href="">材料展示</a></h4>
+								  <h4 class="list-group-item-heading"><a href="${pageContext.request.contextPath}/material">材料展示</a></h4>
 
 								  <p class="list-group-item-text">材料展示：介绍。。。。。</p>
 							  </div>
@@ -64,7 +68,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							  </div>
 							  <div class="row-content">
 								  <div class="action-secondary"><i class="glyphicon glyphicon-info-sign"></i></div>
-								  <h4 class="list-group-item-heading"><a href="">设备统计分析</a></h4>
+								  <h4 class="list-group-item-heading"><a href="${pageContext.request.contextPath}/device">设备统计分析</a></h4>
 
 								  <p class="list-group-item-text">设备统计分析：介绍</p>
 							  </div>
@@ -82,7 +86,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							  </div>
 							  <div class="row-content">
 								  <div class="action-secondary"><i class="glyphicon glyphicon-info-sign"></i></div>
-								  <h4 class="list-group-item-heading"><a href="">新闻发布</a></h4>
+								  <h4 class="list-group-item-heading"><a href="${pageContext.request.contextPath}/news">新闻发布</a></h4>
 
 								  <p class="list-group-item-text">新闻发布新闻发布新闻发布新闻发布.</p>
 							  </div>
@@ -94,7 +98,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							  </div>
 							  <div class="row-content">
 								  <div class="action-secondary"><i class="glyphicon glyphicon-info-sign"></i></div>
-								  <h4 class="list-group-item-heading"><a href="">聊天室</a></h4>
+								  <h4 class="list-group-item-heading"><a href="${pageContext.request.contextPath}/chatRoom">聊天室</a><a href="http://www.baidu.com">聊天室</a></h4>
 
 								  <p class="list-group-item-text">新闻发布新闻发布</p>
 							  </div>
@@ -106,7 +110,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							  </div>
 							  <div class="row-content">
 								  <div class="action-secondary"><i class="glyphicon glyphicon-info-sign"></i></div>
-								  <h4 class="list-group-item-heading"><a href="">权限管理</a></h4>
+								  <h4 class="list-group-item-heading"><a id="permission-btn" href="${pageContext.request.contextPath}/permission">权限管理 </a></h4>
 
 								  <p class="list-group-item-text">权限管理权限管理权限管理</p>
 							  </div>

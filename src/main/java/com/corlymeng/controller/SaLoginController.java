@@ -2,11 +2,20 @@ package com.corlymeng.controller;
 
 
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import net.sf.json.JSONArray;
+
+
+
+
+
+
+import net.sf.json.JSONObject;
+import net.sf.json.JSONSerializer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +29,7 @@ import com.corlymeng.model.User;
 import com.corlymeng.model.UserDAO;
 import com.corlymeng.util.JsonUtil;
 import com.corlymeng.util.MyUtil;
+import com.corlymeng.util.UrlInterface;
 
 @Controller
 public class SaLoginController {
@@ -46,7 +56,7 @@ public class SaLoginController {
 		return "samain/sahome";
 	}
 	/**
-	 * 根据传过来的username参数 返回该userName的信息
+	 * （接口）根据传过来的username参数 返回该userName的信息
 	 * @return
 	 */
 	@RequestMapping(value="user/{username}", method=RequestMethod.GET)
@@ -56,6 +66,10 @@ public class SaLoginController {
 		return jsonUtil.user2json(user).toString();
 		
 	}
+	/**
+	 * （接口）将所有用户的信息暴露出去供其他模块访问
+	 * @return
+	 */
 	@RequestMapping(value="user/allUser", method=RequestMethod.GET)
 	@SuppressWarnings("unchecked")
 	public @ResponseBody List<User> getAllUser(){
@@ -70,9 +84,84 @@ public class SaLoginController {
 		return list;	
 	}
 	
+	
 	@RequestMapping("salogout")
 	public String logout(SessionStatus sessionStatus){
 		sessionStatus.setComplete();
-		return "redirect:samain/salogin";
+		return "samain/salogin";
+	}
+	/**
+	 * 
+	 * 跳转到人员招聘模块
+	 * @param sessionStatus
+	 * @return
+	 */
+	@RequestMapping("/recruiting")
+	public String loginRecruiting(HttpServletRequest request){
+		return "redirect:/";
+	}
+	/**
+	 * 
+	 * 跳转到材料展示模块
+	 * @param sessionStatus
+	 * @return
+	 */
+	@RequestMapping("/material")
+	public String loginMaterial(HttpServletRequest request){
+		return "redirect:samain/sahome";
+	}
+	/**
+	 * 
+	 * 跳转到设备统计模块
+	 * @param sessionStatus
+	 * @return
+	 */
+	@RequestMapping("/device")
+	public String loginDevice(HttpServletRequest request){
+		return "redirect:samain/sahome";
+	}
+	/**
+	 * 
+	 * 跳转到新闻模块
+	 * @param sessionStatus
+	 * @return
+	 */
+	@RequestMapping("/news")
+	public String loginNews(HttpServletRequest request){
+		return "redirect:samain/sahome";
+	}
+	/**
+	 * 
+	 * 跳转到聊天室模块
+	 * @param sessionStatus
+	 * @return
+	 */
+	@RequestMapping("/chatRoom")
+	public String loginChatRoom(HttpServletRequest request){
+		return "redirect:samain/sahome";
+	}
+	/**
+	 * 
+	 * 跳转到权限管理模块
+	 * @param sessionStatus
+	 * @return
+	 */
+	@RequestMapping("/permission")
+	public String loginPermission(Map<String, Object> map,HttpServletRequest request){
+		User user = (User) request.getSession().getAttribute("loginUser");
+		int id = user.getId();
+		String uri = "/rbac/*";
+		UrlInterface urlInterface = new UrlInterface();
+		JSONObject jo = (JSONObject) JSONSerializer.toJSON(urlInterface.loadJson(id,uri));
+		
+		String ss=(String) jo.get("status");
+		if("pass".equals(ss)){
+			
+			return "redirect:http://192.168.31.135/rbac/backend/web/index.php?r=rbac";
+			
+		}else {
+			return "samain/error";
+		}
+		
 	}
 }

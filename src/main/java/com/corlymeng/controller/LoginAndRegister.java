@@ -64,6 +64,7 @@ public class LoginAndRegister {
 			user.setPassword(MyUtil.str2MD5(pwd));
 			user.setRegtime(new Date());
 			userDAO.save(user);
+			
 		}
 		map.put("messages", "注册成功！请登陆");
 		User user = userDAO.findByEmail(email);

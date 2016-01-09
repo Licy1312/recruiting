@@ -59,10 +59,6 @@ public class IndexController {
 	
 	@RequestMapping("/")
 	public String showHome(String username){
-		String url="http://192.168.31.135/rbac/backend/web/index.php?r=rbac/access-interface/authentication&id=7&url=/recruiting";
-		UrlInterface urlInterface = new UrlInterface();
-		System.out.println(urlInterface.loadJson(url)+"...............");
-
 		return "home";
 	}
 	

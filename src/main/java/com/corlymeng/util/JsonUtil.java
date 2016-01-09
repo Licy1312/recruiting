@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 import com.corlymeng.model.User;
 
@@ -24,6 +25,7 @@ public class JsonUtil {
 		map.put("id", user.getId());
 		map.put("username", user.getUsername());
 		JSONArray jsonArray = JSONArray.fromObject(map);
+	
 		return jsonArray;
 	}
 	/**
@@ -32,7 +34,7 @@ public class JsonUtil {
 	 * @return
 	 */
 	public static JSONArray userList2json(List<User> list){
-		
+		JSONObject  dataJson=new JSONObject();
 		JSONArray jsonArray = JSONArray.fromObject(list);
 		
 		return jsonArray;

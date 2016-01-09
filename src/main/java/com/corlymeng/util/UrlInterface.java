@@ -8,8 +8,11 @@ import java.net.URL;
 import java.net.URLConnection;
 
 public class UrlInterface {
-	public static String loadJson (String url) {  
-        StringBuilder json = new StringBuilder();  
+	public static String loadJson (int id,String uri) {  
+		
+		String url = "http://192.168.31.135/rbac/backend/web/index.php?r=rbac/access-interface/authentication&id="+id+"&url="+uri;
+       
+		StringBuilder json = new StringBuilder();  
         try {  
             URL urlObject = new URL(url);  
             URLConnection uc = urlObject.openConnection();  
