@@ -12,11 +12,27 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li class="active"><a href="${pageContext.request.contextPath}/sahome">首页</a></li>
-        <li><a href="${pageContext.request.contextPath}/recruiting">人员招聘分组</a></li>
+        
+        <li>
+        
+        <a href="${pageContext.request.contextPath}/recruiting">人员招聘分组</a> 
+        </li>
         <li><a href="${pageContext.request.contextPath}/news">新闻发布</a></li>
         <li><a href="${pageContext.request.contextPath}/material">材料展示</a></li>
         <li><a href="${pageContext.request.contextPath}/device">设备统计分析</a></li>
-        <li><a href="${pageContext.request.contextPath}/chatRoom">聊天室</a></li>
+        <li style="margin-top:20px;">
+        	 <ul id="cssdropdown">
+				<li class="mainitems">
+					<a href="${pageContext.request.contextPath}/chatRoom">聊天室</a>
+					<ul class="subuls">
+						<li><a href="#">进入聊天</a></li>
+						<li><a href="#">创建话题</a></li>
+						
+					</ul>
+				</li>
+			</ul>
+        </li>
+       
       </ul>
       <ul class="nav navbar-nav navbar-right">
       	<c:choose>
@@ -24,24 +40,10 @@
 		    <li class="dropdown">
       			<a href="#" class="dropdown-toggle" data-toggle="dropdown"> ${sessionScope.loginUser.username } <span class="caret"></span></a>
       			<ul class="dropdown-menu">
-      				<li><a href="user/myresume">个人设置</a></li>
       				<li><a href="salogout">退出</a></li>
       			</ul>
       		</li>
 		  </c:when>
-		  <c:when test="${sessionScope.loginDepart != null}">
-		    <li class="dropdown">
-      			<a href="#" class="dropdown-toggle" data-toggle="dropdown"> ${sessionScope.loginDepart.username } <span class="caret"></span></a>
-      			<ul class="dropdown-menu">
-      				<li><a href="hr/">进入控制台</a></li>
-      				<li><a href="logout">退出</a></li>
-      			</ul>
-      		</li>
-		  </c:when>
-		  <c:otherwise>
-		    <li><a href="login">登陆</a></li>
-        	<li class="hidden"><a href="register">注册</a></li>
-		  </c:otherwise>
 		</c:choose>
       </ul>
     </div>

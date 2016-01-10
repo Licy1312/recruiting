@@ -1,18 +1,9 @@
 package com.corlymeng.controller;
 
-
-
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-
-
-
-
-
-
 
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
@@ -45,7 +36,11 @@ public class SaLoginController {
 	public String login(String email, String pwd,HttpServletRequest request) {
 		User user = userDAO.findByEmail(email);
 		if (user != null && user.getPassword().equals(MyUtil.str2MD5(pwd))) {
-			request.getSession().setAttribute("loginUser", user);	
+			request.getSession().setAttribute("loginUser", user);
+			String string = "/recruiting,/material,/device,/news,/chatRoom,/permission";
+			List<String> list= JsonUtil.menuList(string);
+			request.getSession().setAttribute("list", list);
+		
 			return "samain/sahome";
 		}
 		request.setAttribute("errors", "用户名或密码不正确");
@@ -62,8 +57,7 @@ public class SaLoginController {
 	@RequestMapping(value="user/{username}", method=RequestMethod.GET)
 	public @ResponseBody String getUser(@PathVariable String username){
 		User user = userDAO.findByEmail(username);
-		JsonUtil jsonUtil = new JsonUtil();
-		return jsonUtil.user2json(user).toString();
+		return JsonUtil.user2json(user).toString();
 		
 	}
 	/**
@@ -151,8 +145,7 @@ public class SaLoginController {
 		User user = (User) request.getSession().getAttribute("loginUser");
 		int id = user.getId();
 		String uri = "/rbac/*";
-		UrlInterface urlInterface = new UrlInterface();
-		JSONObject jo = (JSONObject) JSONSerializer.toJSON(urlInterface.loadJson(id,uri));
+		JSONObject jo = (JSONObject) JSONSerializer.toJSON(UrlInterface.loadJson(id,uri));
 		
 		String ss=(String) jo.get("status");
 		if("pass".equals(ss)){

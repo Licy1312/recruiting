@@ -1,0 +1,43 @@
+@CHARSET "UTF-8";
+#cssdropdown, #cssdropdown ul {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+#cssdropdown li {
+	float: left;
+	position: relative;
+}
+.mainitems{
+	
+}
+.mainitems a{
+	margin-left: 6px;
+	margin-right: 8px;
+	text-decoration: none;
+	color: #D7EEEC;
+}
+.subuls{
+	display: none;
+	position: absolute;
+	width:70px;
+	top: 1.2em;
+	left: 0;
+	background-color: #EEEEEE;
+}
+.subuls li{
+	width: 100%;
+}
+.subuls li a{
+	color: #000000;
+} 
+#cssdropdown li>ul { 
+	top: auto;
+	left: auto;
+}
+#cssdropdown li:hover ul, li.over ul { 
+	display: block;
+}
+#restofcontent { 
+	clear: left;
+}

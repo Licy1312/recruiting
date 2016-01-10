@@ -1,5 +1,6 @@
 package com.corlymeng.util;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -7,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
 
 import com.corlymeng.model.User;
 
@@ -29,15 +29,16 @@ public class JsonUtil {
 		return jsonArray;
 	}
 	/**
-	 * 将user的list对象转换为json格式
-	 * @param user
+	 * 将字符串数字转化为list
+	 * @param string
 	 * @return
 	 */
-	public static JSONArray userList2json(List<User> list){
-		JSONObject  dataJson=new JSONObject();
-		JSONArray jsonArray = JSONArray.fromObject(list);
-		
-		return jsonArray;
+	public static List<String> menuList(String string){
+		String[] stringArray = string.split(",");
+		List<String> list = new ArrayList<String>();
+		for(int i=0;i<stringArray.length;i++){
+			list.add(stringArray[i]);
+		}
+		return list;
 	}
-	
 }

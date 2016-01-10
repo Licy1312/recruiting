@@ -22,8 +22,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="css/material.min.css" type="text/css"/>
 	<link rel="stylesheet" href="css/metisMenu.min.css" type="text/css"/>
-	<script language="javascript" src="js/jquery-2.1.4.min.js"></script>
-
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/saheader.css" type="text/css"/>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/saheader.js"></script>
+	<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+	
   </head>
   <body>
   <input id="status" type="hidden" value=“${status}”/>
@@ -37,6 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			  <div class="col-md-6">
 				  <div class="bs-component">
 					  <div class="list-group">
+					  
 						  <div class="list-group-item">
 							  <div class="row-action-primary">
 								  <img class="circle" src="http://lorempixel.com/56/56/people/4" alt="icon">
@@ -44,11 +47,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							  <div class="row-content">
 								  <div class="action-secondary"><i class="glyphicon glyphicon-info-sign"></i></div>
 								  <h4 class="list-group-item-heading"><a href="${pageContext.request.contextPath}/recruiting">人员招聘分组</a></h4>
-
 								  <p class="list-group-item-text">人员招聘分组：介绍。。。。</p>
 							  </div>
 						  </div>
 						  <div class="list-group-separator"></div>
+						
 						  <div class="list-group-item">
 							  <div class="row-action-primary">
 								  <img class="circle" src="http://lorempixel.com/56/56/people/5" alt="icon">
@@ -60,8 +63,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								  <p class="list-group-item-text">材料展示：介绍。。。。。</p>
 							  </div>
 						  </div>
-
 						  <div class="list-group-separator"></div>
+						  
 						  <div class="list-group-item">
 							  <div class="row-action-primary">
 								  <img class="circle" src="http://lorempixel.com/56/56/people/4" alt="icon">
@@ -74,12 +77,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							  </div>
 						  </div>
 						  <div class="list-group-separator"></div>
+						  
 					  </div>
 					  <div id="source-button" class="btn btn-primary btn-xs" style="display: none;">&lt; &gt;</div></div>
 			  </div>
 			  <div class="col-md-6">
 				  <div class="bs-component">
 					  <div class="list-group">
+					  
 						  <div class="list-group-item">
 							  <div class="row-action-primary">
 								  <img class="circle" src="http://lorempixel.com/56/56/people/3" alt="icon">
@@ -92,19 +97,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							  </div>
 						  </div>
 						  <div class="list-group-separator"></div>
+						  
 						  <div class="list-group-item">
 							  <div class="row-action-primary">
 								  <img class="circle" src="http://lorempixel.com/56/56/people/2" alt="icon">
 							  </div>
 							  <div class="row-content">
 								  <div class="action-secondary"><i class="glyphicon glyphicon-info-sign"></i></div>
-								  <h4 class="list-group-item-heading"><a href="${pageContext.request.contextPath}/chatRoom">聊天室</a><a href="http://www.baidu.com">聊天室</a></h4>
-
+								  <h4 class="list-group-item-heading"><a href="${pageContext.request.contextPath}/chatRoom">聊天室</a></h4>
 								  <p class="list-group-item-text">新闻发布新闻发布</p>
 							  </div>
 						  </div>
 						  <div class="list-group-separator"></div>
-						  <div class="list-group-item">
+						  
+						  <c:if test="${sessionScope.list.size()>5}">
+						  	<div class="list-group-item">
 							  <div class="row-action-primary">
 								  <img class="circle" src="http://lorempixel.com/56/56/people/4" alt="icon">
 							  </div>
@@ -116,6 +123,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							  </div>
 						  </div>
 						  <div class="list-group-separator"></div>
+						  </c:if>
+						  
+						  
 					  </div>
 				  </div>
 			  </div>

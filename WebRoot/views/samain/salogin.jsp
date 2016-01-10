@@ -38,7 +38,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div style="margin-left: 360px; width: 500px;">
 				<h3>欢迎登陆2015级硕士SA课程展示平台</h3>
 			</div>
-			<form class="form-horizontal" action="salogin" method="post" style="margin-left: 300px;width: 500px;">
+			<form class="form-horizontal" id="form1"action="salogin" method="post" style="margin-left: 300px;width: 500px;">
 			    <fieldset>
 			        <div class="form-group">
 			    		
@@ -74,7 +74,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			        <div class="form-group">
 			            <div class="col-lg-10 col-lg-offset-2">
 			            	<button type="reset" class="btn btn-primary">取消</button>
-			                <button type="submit" class="btn btn-primary" onclick=checkForm()>登陆</button>
+			                <button type="button" class="btn btn-primary" onclick="javascript:document.getElementById('form1').submit()">登陆</button>
 			            </div>
 			        </div>
 			    </fieldset>
