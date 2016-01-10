@@ -1,5 +1,6 @@
 package com.corlymeng.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import com.corlymeng.model.User;
 import com.corlymeng.model.UserDAO;
 import com.corlymeng.util.JsonUtil;
+import com.corlymeng.util.MenuTest;
 import com.corlymeng.util.MyUtil;
 import com.corlymeng.util.UrlInterface;
 
@@ -35,18 +37,59 @@ public class SaLoginController {
 	@RequestMapping(value="salogin", method=RequestMethod.POST)
 	public String login(String email, String pwd,HttpServletRequest request) {
 		User user = userDAO.findByEmail(email);
+		int id = user.getId();
 		if (user != null && user.getPassword().equals(MyUtil.str2MD5(pwd))) {
-			request.getSession().setAttribute("loginUser", user);
-			String string = "/recruiting,/material,/device,/news,/chatRoom,/permission";
-			List<String> list= JsonUtil.menuList(string);
-			request.getSession().setAttribute("list", list);
-		
-			return "samain/sahome";
+			if (user.getUsertype().equals(1)) {
+				request.getSession().setAttribute("loginUser", user);
+			}else if (user.getUsertype().equals(2)) {
+				request.getSession().setAttribute("loginDepart", user);
+			}
+//			JSONObject jo = (JSONObject) JSONSerializer.toJSON(UrlInterface.menuJson(id));
+//			String ss=(String) jo.get("status");
+//			System.out.println(ss);
+			List<String> menuName = new ArrayList<String>();
+				menuName.add("人员招聘");
+				menuName.add("权限管理");
+				menuName.add("新闻发布");
+				menuName.add("材料管理");
+				menuName.add("设备管理");
+				menuName.add("聊天室");
+			List<String> menuPath = new ArrayList<String>();
+				menuPath.add("/recruiting");
+				menuPath.add("/rbac");
+				menuPath.add("/news");
+				menuPath.add("/material");
+				menuPath.add("/device");
+				menuPath.add("/chatRoom");
+		    
+					
+//			@SuppressWarnings("unchecked")
+//			List<String> menuName = (List<String>) jo.get("names");
+//			@SuppressWarnings("unchecked")
+//			List<String> menuPath = (List<String>) jo.get("routers");
+			
+			List<MenuTest> list = new ArrayList<MenuTest>();
+			for(int i=0; i<menuName.size();i++){
+				
+				MenuTest menuTest = new MenuTest(menuPath.get(i),menuName.get(i));
+				list.add(menuTest);
+			
+			}
+			List<MenuTest> subList = list.subList(0,menuName.size() );
+			List<MenuTest> newList = new ArrayList<MenuTest>();  
+	        	newList.addAll(subList);
+//			if("success".equals(ss)){
+				request.getSession().setAttribute("menuTest", newList);
+				System.out.println(newList.get(0).getMenuName());
+				return "samain/sahome";
+//			}else {
+//				System.out.println("访问接口失败！");
+//			}
 		}
 		request.setAttribute("errors", "用户名或密码不正确");
 		return "samain/salogin";
 	}
-	@RequestMapping(value="sahome", method=RequestMethod.GET)
+	@RequestMapping(value="/sahome", method=RequestMethod.GET)
 	public String sahome(){
 		return "samain/sahome";
 	}
@@ -82,6 +125,7 @@ public class SaLoginController {
 	@RequestMapping("salogout")
 	public String logout(SessionStatus sessionStatus){
 		sessionStatus.setComplete();
+		
 		return "samain/salogin";
 	}
 	/**
@@ -112,7 +156,9 @@ public class SaLoginController {
 	 */
 	@RequestMapping("/device")
 	public String loginDevice(HttpServletRequest request){
-		return "redirect:samain/sahome";
+		User user = (User) request.getSession().getAttribute("loginUser");
+		int id = user.getId();
+		return "redirect:http://192.168.31.140:8080/sbc/charts/device_index.shtml?id="+id;
 	}
 	/**
 	 * 

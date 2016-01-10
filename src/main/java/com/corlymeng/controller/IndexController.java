@@ -57,12 +57,12 @@ public class IndexController {
 	@Autowired
 	private CollectionDAO collectionDAO;
 	
-	@RequestMapping("/")
-	public String showHome(String username){
-		return "home";
-	}
+//	@RequestMapping("/")
+//	public String showHome(String username){
+//		return "home";
+//	}
 	
-	@RequestMapping("/index")
+	@RequestMapping({"/","/index"})
 	public String showIndex(@RequestParam(value="major", required=false) String majorId,
 				@RequestParam(value="department", required=false) String departmentId,
 				Map<String, Object> map) {

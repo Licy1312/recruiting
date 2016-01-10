@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" import="com.corlymeng.util.MenuTest" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -39,92 +39,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			  <div class="col-md-6">
 				  <div class="bs-component">
 					  <div class="list-group">
-					  
+					  <c:forEach var="menu" items="${menuTest}">
+					 				
+					  			  
 						  <div class="list-group-item">
 							  <div class="row-action-primary">
 								  <img class="circle" src="http://lorempixel.com/56/56/people/4" alt="icon">
 							  </div>
 							  <div class="row-content">
 								  <div class="action-secondary"><i class="glyphicon glyphicon-info-sign"></i></div>
-								  <h4 class="list-group-item-heading"><a href="${pageContext.request.contextPath}/recruiting">人员招聘分组</a></h4>
+								  <h4 class="list-group-item-heading"><a href="${pageContext.request.contextPath}/"> 
+								  ${menu.menuName}
+								 	</a></h4>
 								  <p class="list-group-item-text">人员招聘分组：介绍。。。。</p>
+								  
 							  </div>
 						  </div>
 						  <div class="list-group-separator"></div>
+						  </c:forEach>
+						  
 						
-						  <div class="list-group-item">
-							  <div class="row-action-primary">
-								  <img class="circle" src="http://lorempixel.com/56/56/people/5" alt="icon">
-							  </div>
-							  <div class="row-content">
-								  <div class="action-secondary"><i class="glyphicon glyphicon-info-sign"></i></div>
-								  <h4 class="list-group-item-heading"><a href="${pageContext.request.contextPath}/material">材料展示</a></h4>
-
-								  <p class="list-group-item-text">材料展示：介绍。。。。。</p>
-							  </div>
-						  </div>
-						  <div class="list-group-separator"></div>
-						  
-						  <div class="list-group-item">
-							  <div class="row-action-primary">
-								  <img class="circle" src="http://lorempixel.com/56/56/people/4" alt="icon">
-							  </div>
-							  <div class="row-content">
-								  <div class="action-secondary"><i class="glyphicon glyphicon-info-sign"></i></div>
-								  <h4 class="list-group-item-heading"><a href="${pageContext.request.contextPath}/device">设备统计分析</a></h4>
-
-								  <p class="list-group-item-text">设备统计分析：介绍</p>
-							  </div>
-						  </div>
-						  <div class="list-group-separator"></div>
-						  
-					  </div>
-					  <div id="source-button" class="btn btn-primary btn-xs" style="display: none;">&lt; &gt;</div></div>
-			  </div>
-			  <div class="col-md-6">
-				  <div class="bs-component">
-					  <div class="list-group">
-					  
-						  <div class="list-group-item">
-							  <div class="row-action-primary">
-								  <img class="circle" src="http://lorempixel.com/56/56/people/3" alt="icon">
-							  </div>
-							  <div class="row-content">
-								  <div class="action-secondary"><i class="glyphicon glyphicon-info-sign"></i></div>
-								  <h4 class="list-group-item-heading"><a href="${pageContext.request.contextPath}/news">新闻发布</a></h4>
-
-								  <p class="list-group-item-text">新闻发布新闻发布新闻发布新闻发布.</p>
-							  </div>
-						  </div>
-						  <div class="list-group-separator"></div>
-						  
-						  <div class="list-group-item">
-							  <div class="row-action-primary">
-								  <img class="circle" src="http://lorempixel.com/56/56/people/2" alt="icon">
-							  </div>
-							  <div class="row-content">
-								  <div class="action-secondary"><i class="glyphicon glyphicon-info-sign"></i></div>
-								  <h4 class="list-group-item-heading"><a href="${pageContext.request.contextPath}/chatRoom">聊天室</a></h4>
-								  <p class="list-group-item-text">新闻发布新闻发布</p>
-							  </div>
-						  </div>
-						  <div class="list-group-separator"></div>
-						  
-						  <c:if test="${sessionScope.list.size()>5}">
-						  	<div class="list-group-item">
-							  <div class="row-action-primary">
-								  <img class="circle" src="http://lorempixel.com/56/56/people/4" alt="icon">
-							  </div>
-							  <div class="row-content">
-								  <div class="action-secondary"><i class="glyphicon glyphicon-info-sign"></i></div>
-								  <h4 class="list-group-item-heading"><a id="permission-btn" href="${pageContext.request.contextPath}/permission">权限管理 </a></h4>
-
-								  <p class="list-group-item-text">权限管理权限管理权限管理</p>
-							  </div>
-						  </div>
-						  <div class="list-group-separator"></div>
-						  </c:if>
-						  
 						  
 					  </div>
 				  </div>

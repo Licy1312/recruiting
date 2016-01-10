@@ -12,7 +12,7 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <!-- <li class="active"><a href="index">首页</a></li> -->
-        <li><a href="/sahome">关于</a></li>
+        <li><a href="sahome">返回到主页</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
       	<c:choose>
@@ -21,7 +21,7 @@
       			<a href="#" class="dropdown-toggle" data-toggle="dropdown"> ${sessionScope.loginUser.username } <span class="caret"></span></a>
       			<ul class="dropdown-menu">
       				<li><a href="user/myresume">个人设置</a></li>
-      				<li><a href="logout">退出</a></li>
+      				<!-- <li><a href="logout">退出</a></li> -->
       			</ul>
       		</li>
 		  </c:when>
@@ -30,7 +30,7 @@
       			<a href="#" class="dropdown-toggle" data-toggle="dropdown"> ${sessionScope.loginDepart.username } <span class="caret"></span></a>
       			<ul class="dropdown-menu">
       				<li><a href="hr/">进入控制台</a></li>
-      				<li><a href="logout">退出</a></li>
+      				<!-- <li><a href="logout">退出</a></li> -->
       			</ul>
       		</li>
 		  </c:when>
