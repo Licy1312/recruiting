@@ -158,6 +158,7 @@ public class SaLoginController {
 	public String loginDevice(HttpServletRequest request){
 		User user = (User) request.getSession().getAttribute("loginUser");
 		int id = user.getId();
+		System.out.println(id+"...................");
 		return "redirect:http://192.168.31.140:8080/sbc/charts/device_index.shtml?id="+id;
 	}
 	/**
@@ -186,10 +187,17 @@ public class SaLoginController {
 	 * @param sessionStatus
 	 * @return
 	 */
-	@RequestMapping("/permission")
+	@RequestMapping("/rbac")
 	public String loginPermission(Map<String, Object> map,HttpServletRequest request){
-		User user = (User) request.getSession().getAttribute("loginUser");
-		int id = user.getId();
+		User user1 = (User) request.getSession().getAttribute("loginUser");
+		User user2 = (User) request.getSession().getAttribute("loginDepart");
+		int id=0;
+		if(user1!=null){
+			id= user1.getId();
+		}else if(user2!=null){
+			id= user2.getId();
+		}
+		System.out.println(id+"...................");
 		String uri = "/rbac/*";
 		JSONObject jo = (JSONObject) JSONSerializer.toJSON(UrlInterface.loadJson(id,uri));
 		

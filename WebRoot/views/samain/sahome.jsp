@@ -48,7 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							  </div>
 							  <div class="row-content">
 								  <div class="action-secondary"><i class="glyphicon glyphicon-info-sign"></i></div>
-								  <h4 class="list-group-item-heading"><a href="${pageContext.request.contextPath}/"> 
+								  <h4 class="list-group-item-heading"><a href="${pageContext.request.contextPath}${menu.menuPath}"> 
 								  ${menu.menuName}
 								 	</a></h4>
 								  <p class="list-group-item-text">人员招聘分组：介绍。。。。</p>
