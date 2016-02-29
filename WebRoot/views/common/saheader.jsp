@@ -35,7 +35,17 @@
        
       </ul>
       <ul class="nav navbar-nav navbar-right">
-		<c:choose>
+      
+      
+      <li class="dropdown">
+      			<a href="#" class="dropdown-toggle" data-toggle="dropdown"> ${sessionScope.nowUser.username } <span class="caret"></span></a>
+      			<ul class="dropdown-menu">
+      				<li><a href="salogout">退出</a></li>
+      			</ul>
+      		</li>
+      		
+      		
+		<%-- <c:choose>
 		  <c:when test="${sessionScope.loginUser != null }">
 		    <li class="dropdown">
       			<a href="#" class="dropdown-toggle" data-toggle="dropdown"> ${sessionScope.loginUser.username } <span class="caret"></span></a>
@@ -52,7 +62,7 @@
       			</ul>
       		</li>
 		  </c:when>
-		</c:choose>
+		</c:choose> --%>
       </ul>
     </div>
   </div>

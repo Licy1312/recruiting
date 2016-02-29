@@ -66,7 +66,7 @@ public class IndexController {
 	public String showIndex(@RequestParam(value="major", required=false) String majorId,
 				@RequestParam(value="department", required=false) String departmentId,
 				Map<String, Object> map) {
-		map.put("title", "大牛网");
+		map.put("title", "人员招聘分组");
 		System.out.println("major: " + majorId + "-- department: " +departmentId);
 		map.put("majorBase", "index?department="+departmentId);
 		map.put("departmentBase", "index?major="+majorId);

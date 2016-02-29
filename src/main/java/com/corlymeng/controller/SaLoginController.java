@@ -39,56 +39,62 @@ public class SaLoginController {
 		User user = userDAO.findByEmail(email);
 		int id = user.getId();
 		if (user != null && user.getPassword().equals(MyUtil.str2MD5(pwd))) {
-			if (user.getUsertype().equals(1)) {
-				request.getSession().setAttribute("loginUser", user);
-			}else if (user.getUsertype().equals(2)) {
-				request.getSession().setAttribute("loginDepart", user);
-			}
-//			JSONObject jo = (JSONObject) JSONSerializer.toJSON(UrlInterface.menuJson(id));
-//			String ss=(String) jo.get("status");
-//			System.out.println(ss);
-			List<String> menuName = new ArrayList<String>();
-				menuName.add("人员招聘");
-				menuName.add("权限管理");
-				menuName.add("新闻发布");
-				menuName.add("材料管理");
-				menuName.add("设备管理");
-				menuName.add("聊天室");
-			List<String> menuPath = new ArrayList<String>();
-				menuPath.add("/recruiting");
-				menuPath.add("/rbac");
-				menuPath.add("/news");
-				menuPath.add("/material");
-				menuPath.add("/device");
-				menuPath.add("/chatRoom");
-		    
-					
-//			@SuppressWarnings("unchecked")
-//			List<String> menuName = (List<String>) jo.get("names");
-//			@SuppressWarnings("unchecked")
-//			List<String> menuPath = (List<String>) jo.get("routers");
-			
-			List<MenuTest> list = new ArrayList<MenuTest>();
-			for(int i=0; i<menuName.size();i++){
-				
-				MenuTest menuTest = new MenuTest(menuPath.get(i),menuName.get(i));
-				list.add(menuTest);
-			
-			}
-			List<MenuTest> subList = list.subList(0,menuName.size() );
-			List<MenuTest> newList = new ArrayList<MenuTest>();  
-	        	newList.addAll(subList);
-//			if("success".equals(ss)){
-				request.getSession().setAttribute("menuTest", newList);
-				System.out.println(newList.get(0).getMenuName());
-				return "samain/sahome";
-//			}else {
-//				System.out.println("访问接口失败！");
-//			}
+			request.getSession().setAttribute("nowUser", user);
+			return "redirect:/sa/"+id;
 		}
 		request.setAttribute("errors", "用户名或密码不正确");
 		return "samain/salogin";
 	}
+	
+	@RequestMapping(value="/sa/{id}")
+	public String menuSources(@PathVariable("id") int id,HttpServletRequest request){
+		User user = userDAO.findById(id);
+		request.getSession().setAttribute("nowUser", user);
+//		JSONObject jo = (JSONObject) JSONSerializer.toJSON(UrlInterface.menuJson(id));
+		
+//		String ss=(String) jo.get("status");
+//		System.out.println(ss);
+		List<String> menuName = new ArrayList<String>();
+			menuName.add("人员招聘");
+			menuName.add("权限管理");
+			menuName.add("新闻发布");
+			menuName.add("材料管理");
+			menuName.add("设备管理");
+			menuName.add("聊天室");
+		List<String> menuPath = new ArrayList<String>();
+			menuPath.add("/recruiting");
+			menuPath.add("/rbac");
+			menuPath.add("/news");
+			menuPath.add("/material");
+			menuPath.add("/device");
+			menuPath.add("/chatRoom");
+	    
+				
+//		@SuppressWarnings("unchecked")
+//		List<String> menuName = (List<String>) jo.get("names");
+//		@SuppressWarnings("unchecked")
+//		List<String> menuPath = (List<String>) jo.get("routers");
+		
+		List<MenuTest> list = new ArrayList<MenuTest>();
+		for(int i=0; i<menuName.size();i++){
+			
+			MenuTest menuTest = new MenuTest(menuPath.get(i),menuName.get(i));
+			list.add(menuTest);
+		
+		}
+		List<MenuTest> subList = list.subList(0,menuName.size() );
+		List<MenuTest> newList = new ArrayList<MenuTest>();  
+        	newList.addAll(subList);
+//		if("success".equals(ss)){
+			request.getSession().setAttribute("menuTest", newList);
+			System.out.println(newList.get(0).getMenuName());
+			return "samain/sahome";
+//		}else {
+//			System.out.println("访问接口失败！");
+//		}
+		
+	}
+	
 	@RequestMapping(value="/sahome", method=RequestMethod.GET)
 	public String sahome(){
 		return "samain/sahome";
@@ -136,7 +142,11 @@ public class SaLoginController {
 	 */
 	@RequestMapping("/recruiting")
 	public String loginRecruiting(HttpServletRequest request){
-		return "redirect:/";
+		User user = (User) request.getSession().getAttribute("nowUser");
+		int id = user.getId();
+		
+		System.out.println(id+"...人员招聘................");
+		return "redirect:/toLogin";
 	}
 	/**
 	 * 
@@ -146,6 +156,8 @@ public class SaLoginController {
 	 */
 	@RequestMapping("/material")
 	public String loginMaterial(HttpServletRequest request){
+		User user = (User) request.getSession().getAttribute("nowUser");
+		int id = user.getId();
 		return "redirect:samain/sahome";
 	}
 	/**
@@ -156,10 +168,9 @@ public class SaLoginController {
 	 */
 	@RequestMapping("/device")
 	public String loginDevice(HttpServletRequest request){
-		User user = (User) request.getSession().getAttribute("loginUser");
+		User user = (User) request.getSession().getAttribute("nowUser");
 		int id = user.getId();
-		System.out.println(id+"...................");
-		return "redirect:http://192.168.31.140:8080/sbc/charts/device_index.shtml?id="+id;
+		return "redirect:http://192.168.31.140:8080/SA/charts/device_index.shtml?id="+id;
 	}
 	/**
 	 * 
@@ -169,7 +180,10 @@ public class SaLoginController {
 	 */
 	@RequestMapping("/news")
 	public String loginNews(HttpServletRequest request){
-		return "redirect:samain/sahome";
+		User user = (User) request.getSession().getAttribute("nowUser");
+		int id = user.getId();
+		System.out.println(id+"...................");
+		return "redirect:http://192.168.1.107:8080/news/user/"+id;
 	}
 	/**
 	 * 
@@ -179,6 +193,8 @@ public class SaLoginController {
 	 */
 	@RequestMapping("/chatRoom")
 	public String loginChatRoom(HttpServletRequest request){
+		User user = (User) request.getSession().getAttribute("nowUser");
+		int id = user.getId();
 		return "redirect:samain/sahome";
 	}
 	/**
@@ -189,15 +205,9 @@ public class SaLoginController {
 	 */
 	@RequestMapping("/rbac")
 	public String loginPermission(Map<String, Object> map,HttpServletRequest request){
-		User user1 = (User) request.getSession().getAttribute("loginUser");
-		User user2 = (User) request.getSession().getAttribute("loginDepart");
-		int id=0;
-		if(user1!=null){
-			id= user1.getId();
-		}else if(user2!=null){
-			id= user2.getId();
-		}
-		System.out.println(id+"...................");
+		User user = (User) request.getSession().getAttribute("nowUser");
+		int id = user.getId();
+		System.out.println(id+".......lichangya............");
 		String uri = "/rbac/*";
 		JSONObject jo = (JSONObject) JSONSerializer.toJSON(UrlInterface.loadJson(id,uri));
 		

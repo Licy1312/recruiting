@@ -8,6 +8,9 @@ import java.util.Date;
 import java.util.Map;
 
 
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,7 +63,6 @@ public class LoginAndRegister {
 		}else{
 			User user = new User();
 			user.setUsername(email);
-			
 			user.setPassword(MyUtil.str2MD5(pwd));
 			user.setRegtime(new Date());
 			userDAO.save(user);
@@ -78,9 +80,10 @@ public class LoginAndRegister {
 	}
 	
 	@RequestMapping(value="login", method=RequestMethod.POST)
-	public String login(String email, String pwd, Map<String, Object> map) {
+	public String login(String email, String pwd, Map<String, Object> map,HttpServletRequest request) {
 		
-		User user = userDAO.findByEmail(email);
+		//User user = userDAO.findByEmail(email);
+		User user = (User) request.getSession().getAttribute("nowUser");
 		if (user != null && user.getPassword().equals(MyUtil.str2MD5(pwd))) {
 			if (user.getUsertype().equals(1)) {
 				map.put("loginUser", user);
@@ -94,6 +97,20 @@ public class LoginAndRegister {
 		map.put("errors", "用户名或密码不正确");
 		System.out.println("login");
 		return "login";
+	}
+	
+	@RequestMapping(value="toLogin")
+	public String login(Map<String, Object> map,HttpServletRequest request) {	
+		System.out.println("1234566----------------");
+		User user = (User) request.getSession().getAttribute("nowUser");
+		if (user.getUsertype().equals(1)) {
+			map.put("loginUser", user);
+			return "redirect:index";
+		} else if (user.getUsertype().equals(2)) {
+			map.put("loginDepart", user);
+			return "redirect:hr/";
+		}
+		return "redirect:/salogin";
 	}
 	
 	@RequestMapping("logout")
