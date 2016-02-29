@@ -51,7 +51,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								  <h4 class="list-group-item-heading"><a href="${pageContext.request.contextPath}${menu.menuPath}"> 
 								  ${menu.menuName}
 								 	</a></h4>
-								  <p class="list-group-item-text">人员招聘分组：介绍。。。。</p>
+								  <p class="list-group-item-text"> ${menu.menuDescript}</p>
 								  
 							  </div>
 						  </div>

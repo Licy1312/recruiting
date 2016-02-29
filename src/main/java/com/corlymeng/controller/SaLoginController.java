@@ -50,53 +50,42 @@ public class SaLoginController {
 	public String menuSources(@PathVariable("id") int id,HttpServletRequest request){
 		User user = userDAO.findById(id);
 		request.getSession().setAttribute("nowUser", user);
-//		JSONObject jo = (JSONObject) JSONSerializer.toJSON(UrlInterface.menuJson(id));
+		JSONObject jo = (JSONObject) JSONSerializer.toJSON(UrlInterface.menuJson(id));
 		
-//		String ss=(String) jo.get("status");
-//		System.out.println(ss);
-		List<String> menuName = new ArrayList<String>();
-			menuName.add("人员招聘");
-			menuName.add("权限管理");
-			menuName.add("新闻发布");
-			menuName.add("材料管理");
-			menuName.add("设备管理");
-			menuName.add("聊天室");
-		List<String> menuPath = new ArrayList<String>();
-			menuPath.add("/recruiting");
-			menuPath.add("/rbac");
-			menuPath.add("/news");
-			menuPath.add("/material");
-			menuPath.add("/device");
-			menuPath.add("/chatRoom");
-	    
-				
-//		@SuppressWarnings("unchecked")
-//		List<String> menuName = (List<String>) jo.get("names");
-//		@SuppressWarnings("unchecked")
-//		List<String> menuPath = (List<String>) jo.get("routers");
-		
+		String ss=(String) jo.get("status");
+		System.out.println(ss);
+	    			
+		@SuppressWarnings("unchecked")
+		List<String> menuName = (List<String>) jo.get("names");
+		@SuppressWarnings("unchecked")
+		List<String> menuPath = (List<String>) jo.get("routers");
+		@SuppressWarnings("unchecked")
+		List<String> menuDescript = (List<String>) jo.get("descs");
+		System.out.println(".................12143153");
 		List<MenuTest> list = new ArrayList<MenuTest>();
-		for(int i=0; i<menuName.size();i++){
-			
-			MenuTest menuTest = new MenuTest(menuPath.get(i),menuName.get(i));
-			list.add(menuTest);
 		
+		for(int i=0; i<menuName.size();i++){
+			MenuTest menuTest = new MenuTest(menuPath.get(i),menuName.get(i),menuDescript.get(i));
+			list.add(menuTest);
 		}
+		
 		List<MenuTest> subList = list.subList(0,menuName.size() );
 		List<MenuTest> newList = new ArrayList<MenuTest>();  
         	newList.addAll(subList);
-//		if("success".equals(ss)){
+        	
+		if("success".equals(ss)){
 			request.getSession().setAttribute("menuTest", newList);
-			System.out.println(newList.get(0).getMenuName());
 			return "samain/sahome";
-//		}else {
-//			System.out.println("访问接口失败！");
-//		}
+		}else {
+			System.out.println("访问接口失败！");
+			return "samain/error";
+		}
 		
 	}
 	
 	@RequestMapping(value="/sahome", method=RequestMethod.GET)
-	public String sahome(){
+	public String sahome(HttpServletRequest request){
+		
 		return "samain/sahome";
 	}
 	/**
@@ -145,7 +134,6 @@ public class SaLoginController {
 		User user = (User) request.getSession().getAttribute("nowUser");
 		int id = user.getId();
 		
-		System.out.println(id+"...人员招聘................");
 		return "redirect:/toLogin";
 	}
 	/**
@@ -158,7 +146,8 @@ public class SaLoginController {
 	public String loginMaterial(HttpServletRequest request){
 		User user = (User) request.getSession().getAttribute("nowUser");
 		int id = user.getId();
-		return "redirect:samain/sahome";
+		
+		return "redirect:http://192.168.31.245:8080/MGDB/"+id;
 	}
 	/**
 	 * 
@@ -183,7 +172,7 @@ public class SaLoginController {
 		User user = (User) request.getSession().getAttribute("nowUser");
 		int id = user.getId();
 		System.out.println(id+"...................");
-		return "redirect:http://192.168.1.107:8080/news/user/"+id;
+		return "redirect:http://192.168.31.219:8080/news/user/"+id;
 	}
 	/**
 	 * 
@@ -207,11 +196,11 @@ public class SaLoginController {
 	public String loginPermission(Map<String, Object> map,HttpServletRequest request){
 		User user = (User) request.getSession().getAttribute("nowUser");
 		int id = user.getId();
-		System.out.println(id+".......lichangya............");
 		String uri = "/rbac/*";
 		JSONObject jo = (JSONObject) JSONSerializer.toJSON(UrlInterface.loadJson(id,uri));
 		
 		String ss=(String) jo.get("status");
+		
 		if("pass".equals(ss)){
 			
 			return "redirect:http://192.168.31.135/rbac/backend/web/index.php?r=rbac";
